@@ -5,7 +5,9 @@
   <App id="idAppControl" >
     <pages>
       <Page title="{i18n>title}">
-        <content></content>
+        <content>
+          <Text text="Hello World" />
+        </content>
       </Page>
     </pages>
   </App>
