@@ -6,7 +6,7 @@
     <pages>
       <Page title="{i18n>title}">
         <content>
-          <Text text="Hello World" />
+          <Text text="{i18n>text}" />
         </content>
       </Page>
     </pages>
