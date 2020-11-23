@@ -1,0 +1,16 @@
+{
+  "generator-easy-ui5": {
+    "projectname": "gitpodUi5",
+    "namespace": "au.com.agilux",
+    "platform": "Static webserver",
+    "viewtype": "XML",
+    "viewname": "MainView",
+    "ui5libs": "Local resources (SAPUI5)",
+    "newdir": true,
+    "namespaceURI": "au/com/agilux",
+    "uimodules": [
+      "uimodule"
+    ],
+    "setupCompleted": true
+  }
+}
