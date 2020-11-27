@@ -7,7 +7,7 @@
       <Page title="{i18n>title}">
         <content>
           <Text text="{i18n>text}" />
-            <Button text="Press Me" />
+            <Button text="Press Me 2" />
         </content>
       </Page>
     </pages>
