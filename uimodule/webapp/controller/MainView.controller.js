@@ -6,7 +6,7 @@ sap.ui.define([
   return Controller.extend("au.com.agilux.gitpodUi5.controller.MainView", {
 
     onInit: function(){
-      console.log("hello world");
+      console.log("hello worldssdsd");
     }
   });
 });
