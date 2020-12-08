@@ -3,5 +3,10 @@ sap.ui.define([
 ], function(Controller) {
   "use strict";
 
-  return Controller.extend("au.com.agilux.gitpodUi5.controller.MainView", {});
+  return Controller.extend("au.com.agilux.gitpodUi5.controller.MainView", {
+
+    onInit: function(){
+      console.log("helo");
+    }
+  });
 });
