@@ -8,7 +8,16 @@
       "version": "1.0.0"
     },
     "title": "{{appTitle}}",
-    "description": "{{appDescription}}"
+    "description": "{{appDescription}}",
+     "dataSources": {
+      "ztest_srv": {
+        "uri": "/sap/opu/odata/sap/ztest_srv",
+        "type": "OData",
+        "settings": {
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    }
   },
   "sap.ui": {
     "technology": "UI5",
@@ -28,10 +37,10 @@
   },
   "sap.ui5": {
     "rootView": {
-      "viewName": "au.com.agilux.gitpodUi5.view.MainView",
+      "viewName": "au.com.agilux.gitpodUi5.view.App",
       "type": "XML",
       "async": true,
-      "id": "idAppControl"
+      "id": "app"
     },
     "dependencies": {
       "minUI5Version": "1.60.0",
@@ -51,6 +60,17 @@
         "settings": {
           "bundleName": "au.com.agilux.gitpodUi5.i18n.i18n"
         }
+      },
+      "": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "preload": true,
+          "useBatch": false
+        },
+        "dataSource": "ztest_srv"
       }
     },
     "resources": {
@@ -65,16 +85,23 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "viewPath": "au.com.agilux.gitpodUi5.view",
-        "controlId": "idAppControl",
+        "controlId": "app",
         "controlAggregation": "pages",
         "async": true
       },
       "routes": [
         {
           "name": "RouteMainView",
-          "pattern": "RouteMainView",
+          "pattern": "",
           "target": [
             "TargetMainView"
+          ]
+        },
+        {
+          "name": "detail",
+          "pattern": "/Orders/{orderId}",
+          "target": [
+            "TargetDetail"
           ]
         }
       ],
@@ -82,8 +109,14 @@
         "TargetMainView": {
           "viewType": "XML",
           "viewLevel": 1,
-          "viewId": "idAppControl",
+          "viewId": "main",
           "viewName": "MainView"
+        },
+        "TargetDetail": {
+          "viewType": "XML",
+          "viewLevel": 2,
+          "viewId": "detail",
+          "viewName": "Detail"
         }
       }
     }

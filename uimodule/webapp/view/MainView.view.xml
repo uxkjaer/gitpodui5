@@ -2,14 +2,14 @@
   displayBlock="true"
   xmlns="sap.m"
   xmlns:mvc="sap.ui.core.mvc">
-  <App id="idAppControl" >
-    <pages>
       <Page title="{i18n>title}">
         <content>
-          <Text text="{i18n>text}" />
-            <Button text="Press Me 2" />
+         <List id="PeopleList"
+            headerText="{i18n>otherPage.listHeader}"
+            items="{/Orders}" itemPress="onListItemPress">
+            <StandardListItem title="{OrderID}" description="{CustomerID}" type="Navigation"  />
+			</List>
         </content>
       </Page>
-    </pages>
-  </App>
+
 </mvc:View>

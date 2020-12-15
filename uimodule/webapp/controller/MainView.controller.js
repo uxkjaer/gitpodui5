@@ -7,6 +7,12 @@ sap.ui.define([
 
     onInit: function(){
       console.log("hello world");
+    },
+
+    onListItemPress: function(oEvent){
+      this.getRouter().navTo("detail", {
+              orderId: oEvent.getParameter("listItem").getBindingContext().getProperty("OrderID"),
+            });
     }
   });
 });
