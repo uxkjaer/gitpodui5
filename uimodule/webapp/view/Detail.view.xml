@@ -12,6 +12,12 @@
         <StandardListItem title="{ProductID}" description="{Quantity}" />
       </List>
     </content>
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer></ToolbarSpacer>
+        <Button text="Calc price" press="calcPrice" />
+      </Toolbar>
+    </footer>
   </Page>
 
 </mvc:View>

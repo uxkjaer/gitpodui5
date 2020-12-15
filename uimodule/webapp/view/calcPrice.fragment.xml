@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:form="sap.ui.layout.form">
+	<Dialog id="dialogMileage" title="{i18n>dialogAdd}">
+		<content>
+			<form:SimpleForm id="formTableEntry" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+				singleContainerFullSize="false" editable="true">
+				<form:content>
+          <Label text="Product" />
+          <Input id="product"></Input>
+          <Label text="Quantity" />
+          <Input id="quantity"></Input>
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="Calculate" type="Accept" press="onBtnAccept"/>
+			<Button text="Cancel" type="Reject" press="onBtnCancel"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

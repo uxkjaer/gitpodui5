@@ -20,4 +20,4 @@ server:
       afterMiddleware: compression
       mountPath: /sap/opu/odata/sap/ztest_srv/
       configuration:
-        baseUri: "https://uxkjaer.builtwithdark.com"
+        baseUri: "https://uxkjaer-demo.builtwithdark.com"

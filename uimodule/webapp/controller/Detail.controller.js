@@ -1,12 +1,58 @@
 sap.ui.define([
-  "au/com/agilux/gitpodUi5/controller/BaseController"
-], function(Controller) {
+  "au/com/agilux/gitpodUi5/controller/BaseController",
+  "sap/ui/core/Fragment",
+  "sap/m/MessageBox"
+], function(Controller, Fragment, MessageBox) {
   "use strict";
 
   return Controller.extend("au.com.agilux.gitpodUi5.controller.Detail", {
 
     onInit: function(){
       this.getRouter().getRoute("detail").attachPatternMatched(this.onObjectMatched, this);
+    },
+
+    calcPrice: function(){
+var oView = this.getView();
+
+			// create dialog lazily
+			if (!this.pDialog) {
+				this.pDialog = Fragment.load({
+					id: oView.getId(),
+          name: "au.com.agilux.gitpodUi5.view.calcPrice",
+          controller: this
+				}).then(function (oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					return oDialog;
+				});
+			}
+
+			this.pDialog.then(function(oDialog) {
+				oDialog.open();
+			});
+    },
+
+    onBtnAccept: function(){
+       let product = this.byId("product"),
+          quantity = this.byId("quantity"),
+          oParam = {
+            product: product.getValue(),
+            quantity: parseInt(quantity.getValue())
+          }
+          this.getModel().callFunction("/calcPrice", {
+            method: "POST",
+            urlParameters: oParam,
+            success: function(oData){
+              debugger;
+            },
+            error: function(oError){
+              MessageBox.error("Something went wrong")
+            }
+          });
+    },
+
+    onBtnCancel: function(){
+      this.pDialog.close();
     },
 
     onObjectMatched: function(oEvent){
