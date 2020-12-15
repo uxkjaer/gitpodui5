@@ -32,18 +32,19 @@ var oView = this.getView();
 			});
     },
 
-    onBtnAccept: function(){
+     onBtnAccept: function(oEvent){
        let product = this.byId("product"),
           quantity = this.byId("quantity"),
           oParam = {
             product: product.getValue(),
             quantity: parseInt(quantity.getValue())
-          }
+          };
+          oEvent.getSource().getParent().close();
           this.getModel().callFunction("/calcPrice", {
             method: "POST",
             urlParameters: oParam,
             success: function(oData){
-              debugger;
+              MessageBox.information(`Price is ${oData.amount}`)
             },
             error: function(oError){
               MessageBox.error("Something went wrong")
