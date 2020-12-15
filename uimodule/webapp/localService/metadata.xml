@@ -1,0 +1,567 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+<edmx:DataServices m:DataServiceVersion="2.0">
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="NorthwindModel" xml:lang="en" sap:schema-version="1">
+<EntityType Name="Category" sap:content-version="1">
+<Key>
+<PropertyRef Name="CategoryID"/>
+</Key>
+<Property Name="CategoryID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="true"/>
+<Property Name="Description" Type="Edm.String" sap:unicode="true"/>
+<Property Name="Picture" Type="Edm.Binary" sap:unicode="false"/>
+<NavigationProperty Name="Products" Relationship="NorthwindModel.FK_Products_Categories" FromRole="FromRole_FK_Products_Categories" ToRole="ToRole_FK_Products_Categories"/>
+</EntityType>
+<EntityType Name="CustomerDemographic" sap:content-version="1">
+<Key>
+<PropertyRef Name="CustomerTypeID"/>
+</Key>
+<Property Name="CustomerTypeID" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="true"/>
+<Property Name="CustomerDesc" Type="Edm.String" sap:unicode="true"/>
+<NavigationProperty Name="Customers" Relationship="NorthwindModel.CustomerCustomerDemo" FromRole="FromRole_CustomerCustomerDemo" ToRole="ToRole_CustomerCustomerDemo"/>
+</EntityType>
+<EntityType Name="Customer" sap:content-version="1">
+<Key>
+<PropertyRef Name="CustomerID"/>
+</Key>
+<Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="true"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="ContactName" Type="Edm.String" MaxLength="30" sap:unicode="true"/>
+<Property Name="ContactTitle" Type="Edm.String" MaxLength="30" sap:unicode="true"/>
+<Property Name="Address" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="City" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Region" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Phone" Type="Edm.String" MaxLength="24" sap:unicode="true"/>
+<Property Name="Fax" Type="Edm.String" MaxLength="24" sap:unicode="true"/>
+<NavigationProperty Name="Orders" Relationship="NorthwindModel.FK_Orders_Customers" FromRole="FromRole_FK_Orders_Customers" ToRole="ToRole_FK_Orders_Customers"/>
+<NavigationProperty Name="CustomerDemographics" Relationship="NorthwindModel.CustomerCustomerDemo" FromRole="ToRole_CustomerCustomerDemo" ToRole="FromRole_CustomerCustomerDemo"/>
+</EntityType>
+<EntityType Name="Employee" sap:content-version="1">
+<Key>
+<PropertyRef Name="EmployeeID"/>
+</Key>
+<Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="true"/>
+<Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="true"/>
+<Property Name="Title" Type="Edm.String" MaxLength="30" sap:unicode="true"/>
+<Property Name="TitleOfCourtesy" Type="Edm.String" MaxLength="25" sap:unicode="true"/>
+<Property Name="BirthDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="HireDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="Address" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="City" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Region" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="HomePhone" Type="Edm.String" MaxLength="24" sap:unicode="true"/>
+<Property Name="Extension" Type="Edm.String" MaxLength="4" sap:unicode="true"/>
+<Property Name="Photo" Type="Edm.Binary" sap:unicode="false"/>
+<Property Name="Notes" Type="Edm.String" sap:unicode="true"/>
+<Property Name="ReportsTo" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="PhotoPath" Type="Edm.String" MaxLength="255" sap:unicode="true"/>
+<NavigationProperty Name="Employees1" Relationship="NorthwindModel.FK_Employees_Employees" FromRole="FromRole_FK_Employees_Employees" ToRole="ToRole_FK_Employees_Employees"/>
+<NavigationProperty Name="Employee1" Relationship="NorthwindModel.FK_Employees_Employees" FromRole="FromRole_FK_Employees_Employees" ToRole="ToRole_FK_Employees_Employees"/>
+<NavigationProperty Name="Orders" Relationship="NorthwindModel.FK_Orders_Employees" FromRole="FromRole_FK_Orders_Employees" ToRole="ToRole_FK_Orders_Employees"/>
+<NavigationProperty Name="Territories" Relationship="NorthwindModel.EmployeeTerritories" FromRole="FromRole_EmployeeTerritories" ToRole="ToRole_EmployeeTerritories"/>
+</EntityType>
+<EntityType Name="Order_Detail" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+<PropertyRef Name="ProductID"/>
+</Key>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="Quantity" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="Discount" Type="Edm.Single" Nullable="false" sap:unicode="false"/>
+<NavigationProperty Name="Order" Relationship="NorthwindModel.FK_Order_Details_Orders" FromRole="ToRole_FK_Order_Details_Orders" ToRole="FromRole_FK_Order_Details_Orders"/>
+<NavigationProperty Name="Product" Relationship="NorthwindModel.FK_Order_Details_Products" FromRole="ToRole_FK_Order_Details_Products" ToRole="FromRole_FK_Order_Details_Products"/>
+</EntityType>
+<EntityType Name="Order" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+</Key>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="CustomerID" Type="Edm.String" MaxLength="5" sap:unicode="true"/>
+<Property Name="EmployeeID" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="OrderDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="RequiredDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="ShippedDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="ShipVia" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="Freight" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="ShipName" Type="Edm.String" MaxLength="40" sap:unicode="true"/>
+<Property Name="ShipAddress" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="ShipCity" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="ShipRegion" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="ShipPostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="ShipCountry" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<NavigationProperty Name="Customer" Relationship="NorthwindModel.FK_Orders_Customers" FromRole="ToRole_FK_Orders_Customers" ToRole="FromRole_FK_Orders_Customers"/>
+<NavigationProperty Name="Employee" Relationship="NorthwindModel.FK_Orders_Employees" FromRole="ToRole_FK_Orders_Employees" ToRole="FromRole_FK_Orders_Employees"/>
+<NavigationProperty Name="Order_Details" Relationship="NorthwindModel.FK_Order_Details_Orders" FromRole="FromRole_FK_Order_Details_Orders" ToRole="ToRole_FK_Order_Details_Orders"/>
+<NavigationProperty Name="Shipper" Relationship="NorthwindModel.FK_Orders_Shippers" FromRole="ToRole_FK_Orders_Shippers" ToRole="FromRole_FK_Orders_Shippers"/>
+</EntityType>
+<EntityType Name="Product" sap:content-version="1">
+<Key>
+<PropertyRef Name="ProductID"/>
+</Key>
+<Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="SupplierID" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="CategoryID" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="QuantityPerUnit" Type="Edm.String" MaxLength="20" sap:unicode="true"/>
+<Property Name="UnitPrice" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="UnitsInStock" Type="Edm.Int16" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="UnitsOnOrder" Type="Edm.Int16" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="ReorderLevel" Type="Edm.Int16" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Indicator"/>
+<NavigationProperty Name="Category" Relationship="NorthwindModel.FK_Products_Categories" FromRole="ToRole_FK_Products_Categories" ToRole="FromRole_FK_Products_Categories"/>
+<NavigationProperty Name="Order_Details" Relationship="NorthwindModel.FK_Order_Details_Products" FromRole="FromRole_FK_Order_Details_Products" ToRole="ToRole_FK_Order_Details_Products"/>
+<NavigationProperty Name="Supplier" Relationship="NorthwindModel.FK_Products_Suppliers" FromRole="ToRole_FK_Products_Suppliers" ToRole="FromRole_FK_Products_Suppliers"/>
+</EntityType>
+<EntityType Name="Region" sap:content-version="1">
+<Key>
+<PropertyRef Name="RegionID"/>
+</Key>
+<Property Name="RegionID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="RegionDescription" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="true"/>
+<NavigationProperty Name="Territories" Relationship="NorthwindModel.FK_Territories_Region" FromRole="FromRole_FK_Territories_Region" ToRole="ToRole_FK_Territories_Region"/>
+</EntityType>
+<EntityType Name="Shipper" sap:content-version="1">
+<Key>
+<PropertyRef Name="ShipperID"/>
+</Key>
+<Property Name="ShipperID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="Phone" Type="Edm.String" MaxLength="24" sap:unicode="true"/>
+<NavigationProperty Name="Orders" Relationship="NorthwindModel.FK_Orders_Shippers" FromRole="FromRole_FK_Orders_Shippers" ToRole="ToRole_FK_Orders_Shippers"/>
+</EntityType>
+<EntityType Name="Supplier" sap:content-version="1">
+<Key>
+<PropertyRef Name="SupplierID"/>
+</Key>
+<Property Name="SupplierID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="ContactName" Type="Edm.String" MaxLength="30" sap:unicode="true"/>
+<Property Name="ContactTitle" Type="Edm.String" MaxLength="30" sap:unicode="true"/>
+<Property Name="Address" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="City" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Region" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Phone" Type="Edm.String" MaxLength="24" sap:unicode="true"/>
+<Property Name="Fax" Type="Edm.String" MaxLength="24" sap:unicode="true"/>
+<Property Name="HomePage" Type="Edm.String" sap:unicode="true"/>
+<NavigationProperty Name="Products" Relationship="NorthwindModel.FK_Products_Suppliers" FromRole="FromRole_FK_Products_Suppliers" ToRole="ToRole_FK_Products_Suppliers"/>
+</EntityType>
+<EntityType Name="Territory" sap:content-version="1">
+<Key>
+<PropertyRef Name="TerritoryID"/>
+</Key>
+<Property Name="TerritoryID" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="true"/>
+<Property Name="TerritoryDescription" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="true"/>
+<Property Name="RegionID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<NavigationProperty Name="Region" Relationship="NorthwindModel.FK_Territories_Region" FromRole="ToRole_FK_Territories_Region" ToRole="FromRole_FK_Territories_Region"/>
+<NavigationProperty Name="Employees" Relationship="NorthwindModel.EmployeeTerritories" FromRole="ToRole_EmployeeTerritories" ToRole="FromRole_EmployeeTerritories"/>
+</EntityType>
+<EntityType Name="Alphabetical_list_of_product" sap:content-version="1">
+<Key>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="ProductName"/>
+<PropertyRef Name="Discontinued"/>
+<PropertyRef Name="CategoryName"/>
+</Key>
+<Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="SupplierID" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="CategoryID" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="QuantityPerUnit" Type="Edm.String" MaxLength="20" sap:unicode="true"/>
+<Property Name="UnitPrice" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="UnitsInStock" Type="Edm.Int16" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="UnitsOnOrder" Type="Edm.Int16" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="ReorderLevel" Type="Edm.Int16" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Indicator"/>
+<Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="true"/>
+</EntityType>
+<EntityType Name="Category_Sales_for_1997" sap:content-version="1">
+<Key>
+<PropertyRef Name="CategoryName"/>
+</Key>
+<Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="true"/>
+<Property Name="CategorySales" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Current_Product_List" sap:content-version="1">
+<Key>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="ProductName"/>
+</Key>
+<Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+</EntityType>
+<EntityType Name="Customer_and_Suppliers_by_City" sap:content-version="1">
+<Key>
+<PropertyRef Name="CompanyName"/>
+<PropertyRef Name="Relationship"/>
+</Key>
+<Property Name="City" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="ContactName" Type="Edm.String" MaxLength="30" sap:unicode="true"/>
+<Property Name="Relationship" Type="Edm.String" Nullable="false" MaxLength="9" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Invoice" sap:content-version="1">
+<Key>
+<PropertyRef Name="CustomerName"/>
+<PropertyRef Name="Salesperson"/>
+<PropertyRef Name="OrderID"/>
+<PropertyRef Name="ShipperName"/>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="ProductName"/>
+<PropertyRef Name="UnitPrice"/>
+<PropertyRef Name="Quantity"/>
+<PropertyRef Name="Discount"/>
+</Key>
+<Property Name="ShipName" Type="Edm.String" MaxLength="40" sap:unicode="true"/>
+<Property Name="ShipAddress" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="ShipCity" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="ShipRegion" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="ShipPostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="ShipCountry" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="CustomerID" Type="Edm.String" MaxLength="5" sap:unicode="true"/>
+<Property Name="CustomerName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="Address" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="City" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Region" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Salesperson" Type="Edm.String" Nullable="false" MaxLength="31" sap:unicode="true"/>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="OrderDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="RequiredDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="ShippedDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="ShipperName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="Quantity" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="Discount" Type="Edm.Single" Nullable="false" sap:unicode="false"/>
+<Property Name="ExtendedPrice" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="Freight" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Order_Details_Extended" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="ProductName"/>
+<PropertyRef Name="UnitPrice"/>
+<PropertyRef Name="Quantity"/>
+<PropertyRef Name="Discount"/>
+</Key>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="ProductID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="Quantity" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="Discount" Type="Edm.Single" Nullable="false" sap:unicode="false"/>
+<Property Name="ExtendedPrice" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Order_Subtotal" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+</Key>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="Subtotal" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Orders_Qry" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+<PropertyRef Name="CompanyName"/>
+</Key>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="CustomerID" Type="Edm.String" MaxLength="5" sap:unicode="true"/>
+<Property Name="EmployeeID" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="OrderDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="RequiredDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="ShippedDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="ShipVia" Type="Edm.Int32" sap:unicode="false"/>
+<Property Name="Freight" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="ShipName" Type="Edm.String" MaxLength="40" sap:unicode="true"/>
+<Property Name="ShipAddress" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="ShipCity" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="ShipRegion" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="ShipPostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="ShipCountry" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="Address" Type="Edm.String" MaxLength="60" sap:unicode="true"/>
+<Property Name="City" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="Region" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+<Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:unicode="true"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="true"/>
+</EntityType>
+<EntityType Name="Product_Sales_for_1997" sap:content-version="1">
+<Key>
+<PropertyRef Name="CategoryName"/>
+<PropertyRef Name="ProductName"/>
+</Key>
+<Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="true"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="ProductSales" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Products_Above_Average_Price" sap:content-version="1">
+<Key>
+<PropertyRef Name="ProductName"/>
+</Key>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="UnitPrice" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Products_by_Category" sap:content-version="1">
+<Key>
+<PropertyRef Name="CategoryName"/>
+<PropertyRef Name="ProductName"/>
+<PropertyRef Name="Discontinued"/>
+</Key>
+<Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="true"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="QuantityPerUnit" Type="Edm.String" MaxLength="20" sap:unicode="true"/>
+<Property Name="UnitsInStock" Type="Edm.Int16" sap:unicode="false" sap:label="Signed INT2 / int16"/>
+<Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Indicator"/>
+</EntityType>
+<EntityType Name="Sales_by_Category" sap:content-version="1">
+<Key>
+<PropertyRef Name="CategoryID"/>
+<PropertyRef Name="CategoryName"/>
+<PropertyRef Name="ProductName"/>
+</Key>
+<Property Name="CategoryID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="CategoryName" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="true"/>
+<Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="ProductSales" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Sales_Totals_by_Amount" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+<PropertyRef Name="CompanyName"/>
+</Key>
+<Property Name="SaleAmount" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="true"/>
+<Property Name="ShippedDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+</EntityType>
+<EntityType Name="Summary_of_Sales_by_Quarter" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+</Key>
+<Property Name="ShippedDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="Subtotal" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Summary_of_Sales_by_Year" sap:content-version="1">
+<Key>
+<PropertyRef Name="OrderID"/>
+</Key>
+<Property Name="ShippedDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Time Stamp"/>
+<Property Name="OrderID" Type="Edm.Int32" Nullable="false" sap:unicode="false"/>
+<Property Name="Subtotal" Type="Edm.Decimal" Precision="19" Scale="4" sap:unicode="false"/>
+</EntityType>
+<EntityType Name="Price" sap:content-version="1">
+<Key>
+<PropertyRef Name="product"/>
+<PropertyRef Name="quantity"/>
+</Key>
+<Property Name="product" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="quantity" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="amount" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<Association Name="FK_Employees_Employees" sap:content-version="1">
+<End Type="NorthwindModel.Employee" Multiplicity="0..1" Role="FromRole_FK_Employees_Employees"/>
+<End Type="NorthwindModel.Employee" Multiplicity="*" Role="ToRole_FK_Employees_Employees"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Employees_Employees">
+<PropertyRef Name="EmployeeID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Employees_Employees">
+<PropertyRef Name="ReportsTo"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="FK_Orders_Employees" sap:content-version="1">
+<End Type="NorthwindModel.Employee" Multiplicity="0..1" Role="FromRole_FK_Orders_Employees"/>
+<End Type="NorthwindModel.Order" Multiplicity="*" Role="ToRole_FK_Orders_Employees"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Orders_Employees">
+<PropertyRef Name="EmployeeID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Orders_Employees">
+<PropertyRef Name="EmployeeID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="EmployeeTerritories" sap:content-version="1">
+<End Type="NorthwindModel.Employee" Multiplicity="*" Role="FromRole_EmployeeTerritories"/>
+<End Type="NorthwindModel.Territory" Multiplicity="*" Role="ToRole_EmployeeTerritories"/>
+</Association>
+<Association Name="FK_Orders_Customers" sap:content-version="1">
+<End Type="NorthwindModel.Customer" Multiplicity="0..1" Role="FromRole_FK_Orders_Customers"/>
+<End Type="NorthwindModel.Order" Multiplicity="*" Role="ToRole_FK_Orders_Customers"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Orders_Customers">
+<PropertyRef Name="CustomerID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Orders_Customers">
+<PropertyRef Name="CustomerID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="FK_Territories_Region" sap:content-version="1">
+<End Type="NorthwindModel.Region" Multiplicity="1" Role="FromRole_FK_Territories_Region"/>
+<End Type="NorthwindModel.Territory" Multiplicity="*" Role="ToRole_FK_Territories_Region"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Territories_Region">
+<PropertyRef Name="RegionID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Territories_Region">
+<PropertyRef Name="RegionID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="FK_Products_Suppliers" sap:content-version="1">
+<End Type="NorthwindModel.Supplier" Multiplicity="0..1" Role="FromRole_FK_Products_Suppliers"/>
+<End Type="NorthwindModel.Product" Multiplicity="*" Role="ToRole_FK_Products_Suppliers"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Products_Suppliers">
+<PropertyRef Name="SupplierID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Products_Suppliers">
+<PropertyRef Name="SupplierID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="FK_Order_Details_Orders" sap:content-version="1">
+<End Type="NorthwindModel.Order" Multiplicity="1" Role="FromRole_FK_Order_Details_Orders"/>
+<End Type="NorthwindModel.Order_Detail" Multiplicity="*" Role="ToRole_FK_Order_Details_Orders"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Order_Details_Orders">
+<PropertyRef Name="OrderID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Order_Details_Orders">
+<PropertyRef Name="OrderID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="FK_Order_Details_Products" sap:content-version="1">
+<End Type="NorthwindModel.Product" Multiplicity="1" Role="FromRole_FK_Order_Details_Products"/>
+<End Type="NorthwindModel.Order_Detail" Multiplicity="*" Role="ToRole_FK_Order_Details_Products"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Order_Details_Products">
+<PropertyRef Name="ProductID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Order_Details_Products">
+<PropertyRef Name="ProductID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="FK_Orders_Shippers" sap:content-version="1">
+<End Type="NorthwindModel.Shipper" Multiplicity="0..1" Role="FromRole_FK_Orders_Shippers"/>
+<End Type="NorthwindModel.Order" Multiplicity="*" Role="ToRole_FK_Orders_Shippers"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Orders_Shippers">
+<PropertyRef Name="ShipperID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Orders_Shippers">
+<PropertyRef Name="ShipVia"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="FK_Products_Categories" sap:content-version="1">
+<End Type="NorthwindModel.Category" Multiplicity="0..1" Role="FromRole_FK_Products_Categories"/>
+<End Type="NorthwindModel.Product" Multiplicity="*" Role="ToRole_FK_Products_Categories"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_FK_Products_Categories">
+<PropertyRef Name="CategoryID"/>
+</Principal>
+<Dependent Role="ToRole_FK_Products_Categories">
+<PropertyRef Name="CategoryID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CustomerCustomerDemo" sap:content-version="1">
+<End Type="NorthwindModel.CustomerDemographic" Multiplicity="*" Role="FromRole_CustomerCustomerDemo"/>
+<End Type="NorthwindModel.Customer" Multiplicity="*" Role="ToRole_CustomerCustomerDemo"/>
+</Association>
+<EntityContainer Name="NorthwindModel_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+<EntitySet Name="Categories" EntityType="NorthwindModel.Category" sap:content-version="1"/>
+<EntitySet Name="CustomerDemographics" EntityType="NorthwindModel.CustomerDemographic" sap:content-version="1"/>
+<EntitySet Name="Customers" EntityType="NorthwindModel.Customer" sap:content-version="1"/>
+<EntitySet Name="Employees" EntityType="NorthwindModel.Employee" sap:content-version="1"/>
+<EntitySet Name="Order_Details" EntityType="NorthwindModel.Order_Detail" sap:content-version="1"/>
+<EntitySet Name="Orders" EntityType="NorthwindModel.Order" sap:content-version="1"/>
+<EntitySet Name="Products" EntityType="NorthwindModel.Product" sap:content-version="1"/>
+<EntitySet Name="Regions" EntityType="NorthwindModel.Region" sap:content-version="1"/>
+<EntitySet Name="Shippers" EntityType="NorthwindModel.Shipper" sap:content-version="1"/>
+<EntitySet Name="Suppliers" EntityType="NorthwindModel.Supplier" sap:content-version="1"/>
+<EntitySet Name="Territories" EntityType="NorthwindModel.Territory" sap:content-version="1"/>
+<EntitySet Name="Alphabetical_list_of_products" EntityType="NorthwindModel.Alphabetical_list_of_product" sap:content-version="1"/>
+<EntitySet Name="Category_Sales_for_1997" EntityType="NorthwindModel.Category_Sales_for_1997" sap:content-version="1"/>
+<EntitySet Name="Current_Product_Lists" EntityType="NorthwindModel.Current_Product_List" sap:content-version="1"/>
+<EntitySet Name="Customer_and_Suppliers_by_Cities" EntityType="NorthwindModel.Customer_and_Suppliers_by_City" sap:content-version="1"/>
+<EntitySet Name="Invoices" EntityType="NorthwindModel.Invoice" sap:content-version="1"/>
+<EntitySet Name="Order_Details_Extendeds" EntityType="NorthwindModel.Order_Details_Extended" sap:content-version="1"/>
+<EntitySet Name="Order_Subtotals" EntityType="NorthwindModel.Order_Subtotal" sap:content-version="1"/>
+<EntitySet Name="Orders_Qries" EntityType="NorthwindModel.Orders_Qry" sap:content-version="1"/>
+<EntitySet Name="Product_Sales_for_1997" EntityType="NorthwindModel.Product_Sales_for_1997" sap:content-version="1"/>
+<EntitySet Name="Products_Above_Average_Prices" EntityType="NorthwindModel.Products_Above_Average_Price" sap:content-version="1"/>
+<EntitySet Name="Products_by_Categories" EntityType="NorthwindModel.Products_by_Category" sap:content-version="1"/>
+<EntitySet Name="Sales_by_Categories" EntityType="NorthwindModel.Sales_by_Category" sap:content-version="1"/>
+<EntitySet Name="Sales_Totals_by_Amounts" EntityType="NorthwindModel.Sales_Totals_by_Amount" sap:content-version="1"/>
+<EntitySet Name="Summary_of_Sales_by_Quarters" EntityType="NorthwindModel.Summary_of_Sales_by_Quarter" sap:content-version="1"/>
+<EntitySet Name="Summary_of_Sales_by_Years" EntityType="NorthwindModel.Summary_of_Sales_by_Year" sap:content-version="1"/>
+<EntitySet Name="PriceSet" EntityType="NorthwindModel.Price" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<AssociationSet Name="FK_Orders_Customers" Association="NorthwindModel.FK_Orders_Customers" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Customers" Role="FromRole_FK_Orders_Customers"/>
+<End EntitySet="Orders" Role="ToRole_FK_Orders_Customers"/>
+</AssociationSet>
+<AssociationSet Name="FK_Order_Details_Products" Association="NorthwindModel.FK_Order_Details_Products" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Products" Role="FromRole_FK_Order_Details_Products"/>
+<End EntitySet="Order_Details" Role="ToRole_FK_Order_Details_Products"/>
+</AssociationSet>
+<AssociationSet Name="EmployeeTerritories" Association="NorthwindModel.EmployeeTerritories" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Employees" Role="FromRole_EmployeeTerritories"/>
+<End EntitySet="Territories" Role="ToRole_EmployeeTerritories"/>
+</AssociationSet>
+<AssociationSet Name="FK_Employees_Employees" Association="NorthwindModel.FK_Employees_Employees" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Employees" Role="FromRole_FK_Employees_Employees"/>
+<End EntitySet="Employees" Role="ToRole_FK_Employees_Employees"/>
+</AssociationSet>
+<AssociationSet Name="FK_Products_Categories" Association="NorthwindModel.FK_Products_Categories" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Categories" Role="FromRole_FK_Products_Categories"/>
+<End EntitySet="Products" Role="ToRole_FK_Products_Categories"/>
+</AssociationSet>
+<AssociationSet Name="FK_Orders_Shippers" Association="NorthwindModel.FK_Orders_Shippers" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Shippers" Role="FromRole_FK_Orders_Shippers"/>
+<End EntitySet="Orders" Role="ToRole_FK_Orders_Shippers"/>
+</AssociationSet>
+<AssociationSet Name="FK_Territories_Region" Association="NorthwindModel.FK_Territories_Region" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Regions" Role="FromRole_FK_Territories_Region"/>
+<End EntitySet="Territories" Role="ToRole_FK_Territories_Region"/>
+</AssociationSet>
+<AssociationSet Name="CustomerCustomerDemo" Association="NorthwindModel.CustomerCustomerDemo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CustomerDemographics" Role="FromRole_CustomerCustomerDemo"/>
+<End EntitySet="Customers" Role="ToRole_CustomerCustomerDemo"/>
+</AssociationSet>
+<AssociationSet Name="FK_Products_Suppliers" Association="NorthwindModel.FK_Products_Suppliers" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Suppliers" Role="FromRole_FK_Products_Suppliers"/>
+<End EntitySet="Products" Role="ToRole_FK_Products_Suppliers"/>
+</AssociationSet>
+<AssociationSet Name="FK_Order_Details_Orders" Association="NorthwindModel.FK_Order_Details_Orders" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Orders" Role="FromRole_FK_Order_Details_Orders"/>
+<End EntitySet="Order_Details" Role="ToRole_FK_Order_Details_Orders"/>
+</AssociationSet>
+<AssociationSet Name="FK_Orders_Employees" Association="NorthwindModel.FK_Orders_Employees" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Employees" Role="FromRole_FK_Orders_Employees"/>
+<End EntitySet="Orders" Role="ToRole_FK_Orders_Employees"/>
+</AssociationSet>
+<FunctionImport Name="calcPrice" ReturnType="NorthwindModel.Price" EntitySet="PriceSet" m:HttpMethod="POST"/>
+</EntityContainer>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="https://ECC-DEV.WFM.HEALTH.QLD.GOV.AU:443/sap/opu/odata/sap/ZNORTHWIND_SRV/$metadata"/>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="https://ECC-DEV.WFM.HEALTH.QLD.GOV.AU:443/sap/opu/odata/sap/ZNORTHWIND_SRV/$metadata"/>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>
